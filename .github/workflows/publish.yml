@@ -46,7 +46,7 @@ jobs:
           echo "Target version: $VERSION"
 
           # 버전 업데이트
-          jq ".version = \"$VERSION\"" package.json > tmp && mv tmp packages/client/package.json
+          jq --arg version "$VERSION" '.version = $version' package.json > tmp && mv tmp package.json
 
       - name: Publish packages
         env:
