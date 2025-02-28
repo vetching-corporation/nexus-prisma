@@ -20,7 +20,7 @@ jobs:
 
       - name: Create .npmrc file
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GIT_PAT }}" >> .npmrc
           echo "@vetching-corporation:registry=https://npm.pkg.github.com/" >> .npmrc
 
       - name: Setup pnpm
