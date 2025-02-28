@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@vetching-corporation/prisma-internals':
+        specifier: 6.2.1-dev-5
+        version: 6.2.1-dev-5
       camelcase:
         specifier: ^6.3.0
         version: 6.3.0
@@ -65,10 +68,7 @@ importers:
         version: 7.5.0
       '@vetching-corporation/prisma-client':
         specifier: 6.2.1-dev-5
-        version: 6.2.1-dev-5(@vetching-corporation/prisma-cli@6.2.1-dev-3)
-      '@vetching-corporation/prisma-internals':
-        specifier: 6.2.1-dev-5
-        version: 6.2.1-dev-5
+        version: 6.2.1-dev-5(@vetching-corporation/prisma-cli@6.2.1-dev-3)(prisma@6.2.1)
       cash-rm:
         specifier: 0.2.0
         version: 0.2.0
@@ -613,6 +613,10 @@ packages:
     engines: {node: '>=18.18'}
     peerDependencies:
       '@vetching-corporation/prisma-cli': '*'
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
 
   '@vetching-corporation/prisma-internals@6.2.1-dev-5':
     resolution: {integrity: sha512-Fb//Py4YytZv4kYD2yfvKyJbUfT87Lr9VC4NSc5qKfM9H+/hQORqthzytbuOPC0Hzs0YWelsNWpWdsOYoTxaWQ==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-internals/6.2.1-dev-5/3951cf7440e4f6fbaf52ac318fb3808139fea301}
@@ -3372,9 +3376,11 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  '@vetching-corporation/prisma-client@6.2.1-dev-5(@vetching-corporation/prisma-cli@6.2.1-dev-3)':
+  '@vetching-corporation/prisma-client@6.2.1-dev-5(@vetching-corporation/prisma-cli@6.2.1-dev-3)(prisma@6.2.1)':
     dependencies:
       '@vetching-corporation/prisma-cli': 6.2.1-dev-3
+    optionalDependencies:
+      prisma: 6.2.1
 
   '@vetching-corporation/prisma-internals@6.2.1-dev-5':
     dependencies:
