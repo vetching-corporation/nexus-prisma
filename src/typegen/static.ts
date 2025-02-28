@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@vetching-corporation/prisma-client'
 import { GraphQLResolveInfo } from 'graphql'
 import { core } from 'nexus'
 import { CommonFieldConfig } from 'nexus/dist/core'
@@ -170,7 +170,7 @@ export type BaseRelationOptions<
   resolve?: CustomFieldResolver<TypeName, Alias extends undefined ? MethodName : Alias>
   computedInputs?: LocalComputedInputs<MethodName>
 } & NexusGenPluginFieldConfig<TypeName, Alias extends undefined ? MethodName : Alias> &
-CommonFieldConfig
+  CommonFieldConfig
 
 // If GetNexusPrismaInput returns never, it means there are no filtering/ordering args for it.
 type NexusPrismaRelationOpts<

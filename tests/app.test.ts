@@ -77,7 +77,7 @@ it('integrates together', async () => {
   //
   const graphqlSchema = fs.read('generated/schema.graphql')
   const nexusPrismaTypeGen = fs.read('generated/nexus-plugin-prisma-typegen.d.ts')
-  const prismaClient = require('@prisma/client')
+  const prismaClient = require('@vetching-corporation/prisma-client')
 
   expect(removeNexusHeader(graphqlSchema)).toMatchSnapshot('graphql schema')
   expect(nexusPrismaTypeGen).toMatchSnapshot('nexus prisma typegen')

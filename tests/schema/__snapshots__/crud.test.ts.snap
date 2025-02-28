@@ -12,7 +12,7 @@ type Query {
 
 exports[`support models with only one id field (some crud operations are removed): typegen 1`] = `
 "import * as Typegen from '@mercurialweb/nexus-plugin-prisma/typegen'
-import * as Prisma from '@prisma/client';
+import * as Prisma from '@vetching-corporation/prisma-client';
 
 // Pagination type
 type Pagination = {

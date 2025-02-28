@@ -103,7 +103,7 @@ input NestedStringFilter {
 
 exports[`generates publishers pluralized & camel-cased: typegen 1`] = `
 "import * as Typegen from '@mercurialweb/nexus-plugin-prisma/typegen'
-import * as Prisma from '@prisma/client';
+import * as Prisma from '@vetching-corporation/prisma-client';
 
 // Pagination type
 type Pagination = {

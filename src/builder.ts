@@ -94,7 +94,7 @@ export interface Options {
   inputs?: {
     /**
      * Where can nexus-prisma find the Prisma Client JS package? By default looks in
-     * `node_modules/@prisma/client`. This is needed because nexus-prisma
+     * `node_modules/@vetching-corporation/prisma-client`. This is needed because nexus-prisma
      * gets your Prisma schema AST and Prisma Client JS crud info from the generated
      * Prisma Client JS package.
      */
@@ -191,9 +191,9 @@ let defaultClientPath: string
 if (process.env.NEXUS_PRISMA_CLIENT_PATH) {
   defaultClientPath = process.env.NEXUS_PRISMA_CLIENT_PATH
 } else if (process.env.LINK) {
-  defaultClientPath = eval("path.join(process.cwd(), '/node_modules/@prisma/client')")
+  defaultClientPath = eval("path.join(process.cwd(), '/node_modules/@vetching-corporation/prisma-client')")
 } else {
-  defaultClientPath = '@prisma/client'
+  defaultClientPath = '@vetching-corporation/prisma-client'
 }
 
 // NOTE This will be replaced by Nexus plugins once typegen integration is available.
