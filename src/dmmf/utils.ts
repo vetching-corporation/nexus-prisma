@@ -1,13 +1,21 @@
-import execa from 'execa'
+import path from 'path'
+import type { DMMF } from '@prisma/generator-helper'
+import { getDMMFSync } from '@vetching-corporation/prisma-internals'
 
 export const getPrismaClientDmmf = (packagePath: string) => {
-  let dmmf: any = undefined
+  let dmmf: DMMF.Document | undefined = undefined
 
   try {
-    const { stdout } = execa.sync('node', [__dirname + '/generate.js'], {
-      cwd: process.cwd(),
-    })
-    dmmf = JSON.parse(stdout)
+    const relativePath = !packagePath
+      ? /* Default Path */
+        '/node_modules/.prisma/client/schema.prisma'
+      : /* Custom Path */
+        `${packagePath}/schema.prisma`
+    const datamodelPath = path.isAbsolute(relativePath)
+      ? relativePath
+      : path.join(process.cwd(), relativePath)
+
+    dmmf = getDMMFSync({ datamodelPath })
   } catch {}
 
   if (!dmmf) {

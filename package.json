@@ -21,7 +21,7 @@
     "build:module-facades": "node scripts/build-module-facades",
     "build:ci": "tsc",
     "dev": "pnpm -s build:module-facades && tsc --watch",
-    "prepublish": "pnpm -s build && cp src/dmmf/generate.js dist/dmmf/generate.js",
+    "prepublish": "pnpm -s build",
     "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts' 'examples/**/*.ts'",
     "postinstall": "node ./scripts/postinstall.js",
     "test": "jest --testTimeout=10000 --forceExit",
@@ -33,7 +33,6 @@
     "nexus": "1.3.0"
   },
   "dependencies": {
-    "@prisma/internals": "6.2.1",
     "camelcase": "^6.3.0",
     "endent": "2.1.0",
     "escape-string-regexp": "^4.0.0",
@@ -45,7 +44,6 @@
   },
   "devDependencies": {
     "@prisma-labs/prettier-config": "0.1.0",
-    "@vetching-corporation/prisma-client": "6.2.1-dev-3",
     "@prisma/generator-helper": "6.2.1",
     "@prisma/migrate": "6.2.1",
     "@types/jest": "29.5.2",
@@ -55,6 +53,8 @@
     "@types/pluralize": "0.0.29",
     "@types/prettier": "2.7.3",
     "@types/semver": "7.5.0",
+    "@vetching-corporation/prisma-client": "6.2.1-dev-5",
+    "@vetching-corporation/prisma-internals": "6.2.1-dev-5",
     "cash-rm": "0.2.0",
     "get-port": "^5.1.1",
     "graphql": "16.7.1",

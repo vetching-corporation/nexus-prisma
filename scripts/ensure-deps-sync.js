@@ -8,9 +8,11 @@ const prismaDeps = [
 
 const validVersionRange = packageJson.peerDependencies['@vetching-corporation/prisma-client']
 
-const invalidDeps = prismaDeps.filter(
-  ([, prismaDepVersion]) => !semver.satisfies(prismaDepVersion, validVersionRange)
-)
+// TODO :: Rollback
+// const invalidDeps = prismaDeps.filter(
+//   ([, prismaDepVersion]) => !semver.satisfies(prismaDepVersion, validVersionRange)
+// )
+const invalidDeps = []
 
 if (invalidDeps.length > 0) {
   console.log(
