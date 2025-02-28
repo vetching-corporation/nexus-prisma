@@ -16,5 +16,5 @@ You can find the [documentation on the Nexus website](https://nexusjs.org/docs/p
 ```
 npm install @mercurialweb/nexus-plugin-prisma
 # OR
-yarn add @mercurialweb/nexus-plugin-prisma
+pnpm add @mercurialweb/nexus-plugin-prisma
 ```

@@ -1,6 +1,6 @@
 {
-  "name": "@mercurialweb/nexus-plugin-prisma",
-  "version": "6.2.1",
+  "name": "@vetching-corporation/nexus-prisma",
+  "version": "0.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -15,23 +15,20 @@
     "typegen.d.ts"
   ],
   "scripts": {
-    "release": "npm config -L project set @mercurialweb:registry=https://npm.pkg.github.com/ && yarn publish",
-    "npm-release": "npm config -L project set @mercurialweb:registry=https://registry.npmjs.org/ && yarn publish",
     "clean": "rm -rf dist",
-    "build": "yarn clean && yarn build:deps-sync && yarn build:module-facades && tsc",
+    "build": "pnpm clean && pnpm build:deps-sync && pnpm build:module-facades && tsc",
     "build:deps-sync": "node scripts/ensure-deps-sync",
     "build:module-facades": "node scripts/build-module-facades",
     "build:ci": "tsc",
-    "dev": "yarn -s build:module-facades && tsc --watch",
-    "prepublish": "yarn -s build && cp src/dmmf/generate.js dist/dmmf/generate.js",
+    "dev": "pnpm -s build:module-facades && tsc --watch",
+    "prepublish": "pnpm -s build && cp src/dmmf/generate.js dist/dmmf/generate.js",
     "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts' 'examples/**/*.ts'",
     "postinstall": "node ./scripts/postinstall.js",
     "test": "jest --testTimeout=10000 --forceExit",
-    "test:dev": "jest src tests/ --watch",
-    "upgrade-prisma-dev": "yarn add prisma @prisma/client@dev @prisma/generator-helper@dev @prisma/migrate@dev @prisma/sdk@dev"
+    "test:dev": "jest src tests/ --watch"
   },
   "peerDependencies": {
-    "@prisma/client": "6.2.1",
+    "@vetching-corporation/prisma-client": "6.2.1-dev-3",
     "graphql": "16.7.1",
     "nexus": "1.3.0"
   },
@@ -48,7 +45,7 @@
   },
   "devDependencies": {
     "@prisma-labs/prettier-config": "0.1.0",
-    "@prisma/client": "6.2.1",
+    "@vetching-corporation/prisma-client": "6.2.1-dev-3",
     "@prisma/generator-helper": "6.2.1",
     "@prisma/migrate": "6.2.1",
     "@types/jest": "29.5.2",
@@ -86,7 +83,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MercurialWeb/nexus-plugin-prisma.git"
+    "url": "git+https://github.com/vetching-corporation/nexus-prisma.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "nexus",
@@ -94,7 +94,7 @@
     "plugin"
   ],
   "bugs": {
-    "url": "https://github.com/MercurialWeb/nexus-plugin-prisma/issues"
+    "url": "https://github.com/vetching-corporation/nexus-plugin-prisma/issues"
   },
-  "homepage": "https://github.com/MercurialWeb/nexus-plugin-prisma#readme"
+  "homepage": "https://github.com/vetching-corporation/nexus-plugin-prisma#readme"
 }
