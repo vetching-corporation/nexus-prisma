@@ -1,5 +1,5 @@
 const PrismaClientGenerator = require('@vetching-corporation/prisma-client/generator-build')
-import * as SDK from '@prisma/internals'
+import * as SDK from '@vetching-corporation/prisma-internals'
 import * as GQL from 'graphql'
 import * as Nexus from 'nexus'
 import stripAnsi from 'strip-ansi'

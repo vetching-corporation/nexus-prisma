@@ -1,6 +1,6 @@
 //@ts-ignore
 import { Migrate } from '@prisma/migrate'
-import { getGenerator } from '@prisma/internals'
+import { getGenerator } from '@vetching-corporation/prisma-internals'
 import endent from 'endent'
 import * as fs from 'fs-jetpack'
 import getPort from 'get-port'
