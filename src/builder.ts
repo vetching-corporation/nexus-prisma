@@ -594,7 +594,8 @@ export class SchemaBuilder {
     if (config.typeName === 'Mutation') {
       return this.argsFromMutationField(config)
     } else if (config.operation === 'findUnique') {
-      return config.field.args.map((arg) => ({
+      const args = config.field.args.filter((arg) => arg.inputType.type !== 'RelationLoadStrategy')
+      return args.map((arg) => ({
         arg,
         type: this.dmmf.getInputType(arg.inputType.type),
       }))
@@ -604,7 +605,8 @@ export class SchemaBuilder {
   }
 
   argsFromMutationField({ publisherConfig, field }: FieldConfigData): CustomInputArg[] {
-    return field.args.map((arg) => {
+    const args = field.args.filter((arg) => arg.inputType.type !== 'RelationLoadStrategy')
+    return args.map((arg) => {
       const prismaClientInputType = this.dmmf.getInputType(arg.inputType.type)
       /*
       Since globallyComputedInputs were already filtered during schema transformation,
