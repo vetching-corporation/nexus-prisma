@@ -39,7 +39,7 @@ jobs:
           scope: '@vetching-corporation'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build dependencies
         run: pnpm build

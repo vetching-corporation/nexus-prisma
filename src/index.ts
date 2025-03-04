@@ -57,15 +57,15 @@ function ensurePeerDepRangeSatisfied(depName: string) {
   } catch {}
 }
 
-ensureDepIsInstalled('nexus')
-ensureDepIsInstalled('graphql')
+// ensureDepIsInstalled('nexus')
+// ensureDepIsInstalled('graphql')
 // ensureDepIsInstalled('@vetching-corporation/prisma-client')
 
 // TODO: Bring back peer dep range check for graphql once we have proper ranges
 // TODO: They're currently way too conservative
 
 //ensurePeerDepRangeSatisfied('graphql')
-ensurePeerDepRangeSatisfied('nexus')
+// ensurePeerDepRangeSatisfied('nexus')
 
 // TODO :: Rollback
 // ensurePeerDepRangeSatisfied('@vetching-corporation/prisma-client')
