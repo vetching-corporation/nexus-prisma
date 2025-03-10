@@ -28,12 +28,12 @@
     "test:dev": "jest src tests/ --watch"
   },
   "peerDependencies": {
-    "@vetching-corporation/prisma-client": "^6",
+    "@vetching-corporation/prisma-client": "6.2.1",
     "graphql": "16.7.1",
     "nexus": "1.3.0"
   },
   "dependencies": {
-    "@vetching-corporation/prisma-internals": "6.2.1-dev-6",
+    "@vetching-corporation/prisma-internals": "6.2.1",
     "camelcase": "^6.3.0",
     "endent": "2.1.0",
     "escape-string-regexp": "^4.0.0",
@@ -54,7 +54,7 @@
     "@types/pluralize": "0.0.29",
     "@types/prettier": "2.7.3",
     "@types/semver": "7.5.0",
-    "@vetching-corporation/prisma-client": "6.2.1-dev-6",
+    "@vetching-corporation/prisma-client": "6.2.1",
     "cash-rm": "0.2.0",
     "get-port": "^5.1.1",
     "graphql": "16.7.1",
@@ -76,7 +76,7 @@
     "typescript": "5.1.3"
   },
   "prettier": "@prisma-labs/prettier-config",
-  "description": "@mercurialweb/nexus-plugin-prisma",
+  "description": "@vetching-corporation/nexus-prisma",
   "directories": {
     "example": "examples",
     "test": "tests"

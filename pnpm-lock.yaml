@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vetching-corporation/prisma-internals':
-        specifier: 6.2.1-dev-6
-        version: 6.2.1-dev-6
+        specifier: 6.2.1
+        version: 6.2.1
       camelcase:
         specifier: ^6.3.0
         version: 6.3.0
@@ -67,8 +67,8 @@ importers:
         specifier: 7.5.0
         version: 7.5.0
       '@vetching-corporation/prisma-client':
-        specifier: 6.2.1-dev-6
-        version: 6.2.1-dev-6(@vetching-corporation/prisma-cli@6.2.1-dev-3)
+        specifier: 6.2.1
+        version: 6.2.1(@vetching-corporation/prisma-cli@6.2.1)(prisma@6.2.1)
       cash-rm:
         specifier: 0.2.0
         version: 0.2.0
@@ -603,19 +603,23 @@ packages:
   '@types/yargs@17.0.33':
     resolution: {integrity: sha512-WpxBCKWPLr4xSsHgz511rFJAM+wS28w2zEO1QDNY5zM/S8ok70NNfztH0xwhqKyaK0OHCbN98LDAZuy1ctxDkA==}
 
-  '@vetching-corporation/prisma-cli@6.2.1-dev-3':
-    resolution: {integrity: sha512-ygK8lK78VgS8gjjaN49vVbIIaskN8t2zMmgyvbI2A8rq8azGtxkCat9nsF1Lw7ghFfXb9aJVROEzvophXrRr+w==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-cli/6.2.1-dev-3/5148e3eb3be408df827c5943b9525f6a3a555e32}
+  '@vetching-corporation/prisma-cli@6.2.1':
+    resolution: {integrity: sha512-SEcWrpj6GWvmNWRXejZriN17sHdonXXma2jwUlgRPP4RO0ufcncgzuKXxHQJpisJ5uZKHuuo6AC1w6ClqIQhqw==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-cli/6.2.1/1a0603070d011f03d92462dfa3fd9a2d2c279db1}
     engines: {node: '>=18.18'}
     hasBin: true
 
-  '@vetching-corporation/prisma-client@6.2.1-dev-6':
-    resolution: {integrity: sha512-dz9++8O5rrVNdTSIsX0w8wNlMTlZ3wtz2pg43yLqmXsxTdTwn8IkBwTGZsww8bevw3wYyeK629aZ9kdUwTr/dA==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-client/6.2.1-dev-6/65e6b28c79f0930dc28fa3a748bc3133dc3a73c4}
+  '@vetching-corporation/prisma-client@6.2.1':
+    resolution: {integrity: sha512-R1HFzh8KxqoGGlwkA6UuZB7xx3JzxTfQ7fYbAQ0Dor4zZXAeCvFpg+1Zaz9kH/BqellqjZF3kkVqyOBSxBZzlQ==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-client/6.2.1/8c4be602af7e9c4cedf455e9659eafb7dba41329}
     engines: {node: '>=18.18'}
     peerDependencies:
       '@vetching-corporation/prisma-cli': '*'
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
 
-  '@vetching-corporation/prisma-internals@6.2.1-dev-6':
-    resolution: {integrity: sha512-OIR6bYwF1+xCXSXAqSUYvibEYz2sxmekVZAVtgRWBtgRb6Yslg9XqyysNLAoOMErwk1uh7JHFSwJ+jHiQE7siw==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-internals/6.2.1-dev-6/310c0ea9306501f13c74457d785ec3bea6b8273f}
+  '@vetching-corporation/prisma-internals@6.2.1':
+    resolution: {integrity: sha512-GBdZ+h2Qz4CfNelCMwe4yJD2o6ytOe7sneR7YduxpnlO6hfw+jJrdO/4krBPQsiLxCrvYU1yowPoiMDu4uERww==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-internals/6.2.1/3cf8aa43a8eee3867d10937423411a1c993bab57}
 
   '@vue/compiler-core@3.5.13':
     resolution: {integrity: sha512-oOdAkwqUfW1WqpwSYJce06wvt6HljgY3fGeM9NcVA1HaYOij3mZG9Rkysn0OHuyUAGMbEbARIpsG+LPVlBJ5/Q==}
@@ -3366,17 +3370,19 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@vetching-corporation/prisma-cli@6.2.1-dev-3':
+  '@vetching-corporation/prisma-cli@6.2.1':
     dependencies:
       '@prisma/engines': 6.2.1
     optionalDependencies:
       fsevents: 2.3.3
 
-  '@vetching-corporation/prisma-client@6.2.1-dev-6(@vetching-corporation/prisma-cli@6.2.1-dev-3)':
+  '@vetching-corporation/prisma-client@6.2.1(@vetching-corporation/prisma-cli@6.2.1)(prisma@6.2.1)':
     dependencies:
-      '@vetching-corporation/prisma-cli': 6.2.1-dev-3
+      '@vetching-corporation/prisma-cli': 6.2.1
+    optionalDependencies:
+      prisma: 6.2.1
 
-  '@vetching-corporation/prisma-internals@6.2.1-dev-6':
+  '@vetching-corporation/prisma-internals@6.2.1':
     dependencies:
       '@prisma/debug': 6.2.1
       '@prisma/engines': 6.2.1
