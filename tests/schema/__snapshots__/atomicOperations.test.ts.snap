@@ -6,7 +6,7 @@ exports[`disable atomic operations: schema 1`] = `
   deleteOneModelName(where: ModelNameWhereUniqueInput!): ModelName
   updateOneModelName(data: ModelNameUpdateInput!, where: ModelNameWhereUniqueInput!): ModelName
   upsertOneModelName(where: ModelNameWhereUniqueInput!, create: ModelNameCreateInput!, update: ModelNameUpdateInput!): ModelName!
-  updateManyModelName(data: ModelNameUpdateManyMutationInput!, where: ModelNameWhereInput): AffectedRowsOutput!
+  updateManyModelName(data: ModelNameUpdateManyMutationInput!, where: ModelNameWhereInput, limit: Int): AffectedRowsOutput!
 }
 
 type ModelName {
@@ -20,6 +20,11 @@ input ModelNameCreateInput {
 
 input ModelNameWhereUniqueInput {
   id: Int
+  AND: [ModelNameWhereInput!]
+  OR: [ModelNameWhereInput!]
+  NOT: [ModelNameWhereInput!]
+  name: StringFilter
+  amount: IntFilter
 }
 
 input ModelNameUpdateInput {
@@ -45,17 +50,6 @@ input ModelNameWhereInput {
   amount: IntFilter
 }
 
-input IntFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntFilter
-}
-
 input StringFilter {
   equals: String
   in: [String!]
@@ -70,7 +64,7 @@ input StringFilter {
   not: NestedStringFilter
 }
 
-input NestedIntFilter {
+input IntFilter {
   equals: Int
   in: [Int!]
   notIn: [Int!]
@@ -93,6 +87,17 @@ input NestedStringFilter {
   startsWith: String
   endsWith: String
   not: NestedStringFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
 }
 
 type Query {
@@ -187,7 +192,7 @@ exports[`support atomic operations (default): schema 1`] = `
   deleteOneModelName(where: ModelNameWhereUniqueInput!): ModelName
   updateOneModelName(data: ModelNameUpdateInput!, where: ModelNameWhereUniqueInput!): ModelName
   upsertOneModelName(where: ModelNameWhereUniqueInput!, create: ModelNameCreateInput!, update: ModelNameUpdateInput!): ModelName!
-  updateManyModelName(data: ModelNameUpdateManyMutationInput!, where: ModelNameWhereInput): AffectedRowsOutput!
+  updateManyModelName(data: ModelNameUpdateManyMutationInput!, where: ModelNameWhereInput, limit: Int): AffectedRowsOutput!
 }
 
 type ModelName {
@@ -201,6 +206,11 @@ input ModelNameCreateInput {
 
 input ModelNameWhereUniqueInput {
   id: Int
+  AND: [ModelNameWhereInput!]
+  OR: [ModelNameWhereInput!]
+  NOT: [ModelNameWhereInput!]
+  name: StringFilter
+  amount: IntFilter
 }
 
 input ModelNameUpdateInput {
@@ -226,16 +236,18 @@ input ModelNameWhereInput {
   amount: IntFilter
 }
 
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
-input IntFieldUpdateOperationsInput {
-  set: Int
-  increment: Int
-  decrement: Int
-  multiply: Int
-  divide: Int
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
 }
 
 input IntFilter {
@@ -249,7 +261,19 @@ input IntFilter {
   not: NestedIntFilter
 }
 
-input StringFilter {
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input IntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input NestedStringFilter {
   equals: String
   in: [String!]
   notIn: [String!]
@@ -272,20 +296,6 @@ input NestedIntFilter {
   gt: Int
   gte: Int
   not: NestedIntFilter
-}
-
-input NestedStringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringFilter
 }
 
 type Query {

@@ -37,6 +37,20 @@ export class DmmfDocument implements InternalDMMF.Document {
   }
 
   getInputType(inputTypeName: string) {
+    // Check if it's a scalar type
+    if (scalarsNameValues.includes(inputTypeName as any)) {
+      // Return a minimal input type for scalars
+      return {
+        name: inputTypeName,
+        constraints: {
+          maxNumFields: null,
+          minNumFields: null,
+        },
+        fields: [],
+        computedInputs: {},
+      }
+    }
+
     const inputType = this.inputTypesIndex[inputTypeName]
 
     if (!inputType) {
@@ -47,6 +61,20 @@ export class DmmfDocument implements InternalDMMF.Document {
   }
 
   getInputTypeWithIndexedFields(inputTypeName: string) {
+    // Check if it's a scalar type
+    if (scalarsNameValues.includes(inputTypeName as any)) {
+      // Return a minimal input type with indexed fields for scalars
+      return {
+        name: inputTypeName,
+        constraints: {
+          maxNumFields: null,
+          minNumFields: null,
+        },
+        fields: {},
+        computedInputs: {},
+      }
+    }
+
     const inputType = this.inputTypesIndexWithFields[inputTypeName]
 
     if (!inputType) {

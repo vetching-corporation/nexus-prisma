@@ -6,7 +6,17 @@ exports[`orderby fields can be allow-listed: schema 1`] = `
 }
 
 type Query {
-  foos(orderBy: [QueryFoosOrderByInput!], first: Int, last: Int, before: FooWhereUniqueInput, after: FooWhereUniqueInput): [Foo!]!
+  foos(where: FooWhereInput, orderBy: [QueryFoosOrderByInput!], first: Int, last: Int, before: FooWhereUniqueInput, after: FooWhereUniqueInput): [Foo!]!
+}
+
+input FooWhereInput {
+  AND: [FooWhereInput!]
+  OR: [FooWhereInput!]
+  NOT: [FooWhereInput!]
+  id: IntFilter
+  a: StringFilter
+  b: StringFilter
+  c: StringFilter
 }
 
 input QueryFoosOrderByInput {
@@ -15,11 +25,67 @@ input QueryFoosOrderByInput {
 
 input FooWhereUniqueInput {
   id: Int
+  AND: [FooWhereInput!]
+  OR: [FooWhereInput!]
+  NOT: [FooWhereInput!]
+  a: StringFilter
+  b: StringFilter
+  c: StringFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
 }
 
 enum SortOrder {
   asc
   desc
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
 }"
 `;
 

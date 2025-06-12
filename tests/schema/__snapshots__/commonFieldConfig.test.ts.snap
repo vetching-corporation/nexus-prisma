@@ -15,10 +15,10 @@ exports[`forwards description & deprecation on all field types: commonFieldsOutp
   favouriteColor: Color! @deprecated(reason: "no longer required")
 
   """All the user's blog posts"""
-  posts(first: Int, last: Int, before: PostWhereUniqueInput, after: PostWhereUniqueInput): [Post!]! @deprecated(reason: "no more blog")
+  posts(where: PostWhereInput, first: Int, last: Int, before: PostWhereUniqueInput, after: PostWhereUniqueInput): [Post!]! @deprecated(reason: "no more blog")
 
   """The user's last blog post"""
-  latestPost: Post @deprecated(reason: "not here anymore")
+  latestPost(where: PostWhereInput): Post @deprecated(reason: "not here anymore")
 }
 
 type Post {
@@ -31,8 +31,173 @@ enum Color {
   Blue
 }
 
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  id: IntFilter
+  title: StringFilter
+  body: StringFilter
+  userId: IntFilter
+  user: UserWhereInput
+  latestPostUsers: UserListRelationFilter
+}
+
 input PostWhereUniqueInput {
   id: Int
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  title: StringFilter
+  body: StringFilter
+  userId: IntFilter
+  user: UserWhereInput
+  latestPostUsers: UserListRelationFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  emailConfirmed: BoolFilter
+  birthYear: IntFilter
+  heightM: FloatFilter
+  favouriteColor: EnumColorFilter
+  latestPostId: IntNullableFilter
+  latestPost: PostWhereInput
+  posts: PostListRelationFilter
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input FloatFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatFilter
+}
+
+input EnumColorFilter {
+  equals: Color
+  in: [Color!]
+  notIn: [Color!]
+  not: NestedEnumColorFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input PostListRelationFilter {
+  every: PostWhereInput
+  some: PostWhereInput
+  none: PostWhereInput
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedFloatFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatFilter
+}
+
+input NestedEnumColorFilter {
+  equals: Color
+  in: [Color!]
+  notIn: [Color!]
+  not: NestedEnumColorFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
 }
 
 type Query {

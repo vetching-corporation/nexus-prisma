@@ -551,6 +551,7 @@ export class SchemaBuilder {
   }: Required<PublisherConfigData>): ResolvedFieldPublisherConfig {
     return {
       pagination: true,
+      filtering: field.outputType.kind === 'object',
       type: field.outputType.type,
       alias: field.name,
       locallyComputedInputs: computedInputs ? computedInputs : {},
@@ -635,23 +636,21 @@ export class SchemaBuilder {
         (arg) => arg.inputType.type === inputObjectTypeDefName && arg.name === 'where'
       )
 
-      if (!whereArg) {
-        throw new Error(`Could not find filtering argument for ${typeName}.${field.name}`)
-      }
-
-      const inputType = this.handleInputObjectCustomization({
-        fieldWhitelist: publisherConfig.filtering,
-        inputTypeName: inputObjectTypeDefName,
-        fieldName: field.name,
-        graphQLTypeName: typeName,
-        isWhereType: true,
-      })
-
-      if (inputType.fields.length > 0) {
-        args.push({
-          arg: whereArg,
-          type: inputType,
+      if (whereArg) {
+        const inputType = this.handleInputObjectCustomization({
+          fieldWhitelist: publisherConfig.filtering,
+          inputTypeName: inputObjectTypeDefName,
+          fieldName: field.name,
+          graphQLTypeName: typeName,
+          isWhereType: true,
         })
+
+        if (inputType.fields.length > 0) {
+          args.push({
+            arg: whereArg,
+            type: inputType,
+          })
+        }
       }
     }
 
@@ -664,23 +663,21 @@ export class SchemaBuilder {
           arg.name === 'orderBy'
       )
 
-      if (!orderByArg) {
-        throw new Error(`Could not find ordering argument for ${typeName}.${field.name}`)
-      }
-
-      const inputType = this.handleInputObjectCustomization({
-        fieldWhitelist: publisherConfig.ordering,
-        inputTypeName: orderByArg.inputType.type,
-        fieldName: field.name,
-        graphQLTypeName: typeName,
-        isWhereType: false,
-      })
-
-      if (inputType.fields.length > 0) {
-        args.push({
-          arg: orderByArg,
-          type: inputType,
+      if (orderByArg) {
+        const inputType = this.handleInputObjectCustomization({
+          fieldWhitelist: publisherConfig.ordering,
+          inputTypeName: orderByArg.inputType.type,
+          fieldName: field.name,
+          graphQLTypeName: typeName,
+          isWhereType: false,
         })
+
+        if (inputType.fields.length > 0) {
+          args.push({
+            arg: orderByArg,
+            type: inputType,
+          })
+        }
       }
     }
 

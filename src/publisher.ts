@@ -24,6 +24,11 @@ export class Publisher {
     | GraphQLScalarType {
     const typeName = customArg.type.name
 
+    // Handle GraphQL scalar types directly
+    if (scalarsNameValues.includes(typeName as any)) {
+      return typeName
+    }
+
     // If type is already published, just reference it
     if (this.isPublished(typeName)) {
       // NOTE the any cast is to get around this error in CI:
@@ -163,9 +168,23 @@ export class Publisher {
 
   protected getTypeFromArg(arg: InternalDMMF.SchemaArg): CustomInputArg['type'] {
     const kindToType = {
-      scalar: (typeName: string) => ({
-        name: typeName,
-      }),
+      scalar: (typeName: string) => {
+        // Check if it's a GraphQL scalar type
+        if (scalarsNameValues.includes(typeName as any)) {
+          return {
+            name: typeName,
+          }
+        }
+        // Otherwise try to look it up in the DMMF
+        try {
+          return this.dmmf.getInputType(typeName)
+        } catch (e) {
+          // If it doesn't exist as an input type, return it as a scalar
+          return {
+            name: typeName,
+          }
+        }
+      },
       enum: (typeName: string) => this.dmmf.getEnumType(typeName),
       object: (typeName: string) => this.dmmf.getInputType(typeName),
     }

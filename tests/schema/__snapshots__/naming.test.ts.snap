@@ -3,7 +3,7 @@
 exports[`generates publishers pluralized & camel-cased: schema 1`] = `
 "type Query {
   modelName(where: ModelNameWhereUniqueInput!): ModelName
-  modelNames(first: Int, last: Int, before: ModelNameWhereUniqueInput, after: ModelNameWhereUniqueInput): [ModelName!]!
+  modelNames(where: ModelNameWhereInput, first: Int, last: Int, before: ModelNameWhereUniqueInput, after: ModelNameWhereUniqueInput): [ModelName!]!
 }
 
 type Mutation {
@@ -11,7 +11,7 @@ type Mutation {
   deleteOneModelName(where: ModelNameWhereUniqueInput!): ModelName
   updateOneModelName(data: ModelNameUpdateInput!, where: ModelNameWhereUniqueInput!): ModelName
   upsertOneModelName(where: ModelNameWhereUniqueInput!, create: ModelNameCreateInput!, update: ModelNameUpdateInput!): ModelName!
-  updateManyModelName(data: ModelNameUpdateManyMutationInput!, where: ModelNameWhereInput): AffectedRowsOutput!
+  updateManyModelName(data: ModelNameUpdateManyMutationInput!, where: ModelNameWhereInput, limit: Int): AffectedRowsOutput!
 }
 
 type ModelName {
@@ -20,6 +20,18 @@ type ModelName {
 
 input ModelNameWhereUniqueInput {
   id: Int
+  AND: [ModelNameWhereInput!]
+  OR: [ModelNameWhereInput!]
+  NOT: [ModelNameWhereInput!]
+  name: StringFilter
+}
+
+input ModelNameWhereInput {
+  AND: [ModelNameWhereInput!]
+  OR: [ModelNameWhereInput!]
+  NOT: [ModelNameWhereInput!]
+  id: IntFilter
+  name: StringFilter
 }
 
 input ModelNameCreateInput {
@@ -38,16 +50,18 @@ input ModelNameUpdateManyMutationInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input ModelNameWhereInput {
-  AND: [ModelNameWhereInput!]
-  OR: [ModelNameWhereInput!]
-  NOT: [ModelNameWhereInput!]
-  id: IntFilter
-  name: StringFilter
-}
-
-input StringFieldUpdateOperationsInput {
-  set: String
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
 }
 
 input IntFilter {
@@ -61,7 +75,11 @@ input IntFilter {
   not: NestedIntFilter
 }
 
-input StringFilter {
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input NestedStringFilter {
   equals: String
   in: [String!]
   notIn: [String!]
@@ -84,20 +102,6 @@ input NestedIntFilter {
   gt: Int
   gte: Int
   not: NestedIntFilter
-}
-
-input NestedStringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringFilter
 }"
 `;
 
