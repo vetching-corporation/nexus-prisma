@@ -4,7 +4,7 @@ const [, , datamodelPath] = process.argv;
 
 (async () => {
   try {
-    const { schemas } = await getSchemaWithPath(undefined, undefined, { cwd: datamodelPath })
+    const { schemas } = await getSchemaWithPath(datamodelPath)
     const config = await getConfig({ datamodel: schemas, ignoreEnvVarErrors: true })
     const previewFeatures = extractPreviewFeatures(config.generators)
     const dmmf = await getDMMF({
