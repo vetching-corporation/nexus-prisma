@@ -8,7 +8,7 @@ import { PaginationStrategy } from '../pagination'
 import { hardWriteFile, hardWriteFileSync } from '../utils'
 
 type Options = {
-  prismaClientPath: string
+  datamodelPath: string
   typegenPath: string
   paginationStrategy: PaginationStrategy
   nexusPrismaImportId?: string
@@ -27,10 +27,10 @@ export function doGenerate(sync: false, options: Options): Promise<void>
 export function doGenerate(sync: boolean, options: Options): void | Promise<void> {
   const paginationStrategy = options.paginationStrategy
   const prismaClientImportId =
-    Path.isAbsolute(options.typegenPath) && Path.isAbsolute(options.prismaClientPath)
-      ? Path.relative(Path.dirname(options.typegenPath), options.prismaClientPath)
-      : options.prismaClientPath
-  const dmmf = getTransformedDmmf(options.prismaClientPath)
+    Path.isAbsolute(options.typegenPath) && Path.isAbsolute(options.datamodelPath)
+      ? Path.relative(Path.dirname(options.typegenPath), options.datamodelPath)
+      : options.datamodelPath
+  const dmmf = getTransformedDmmf(options.datamodelPath)
   const tsDeclaration = render({
     dmmf,
     paginationStrategy,

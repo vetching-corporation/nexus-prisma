@@ -92,13 +92,7 @@ export interface Options {
    */
   shouldGenerateArtifacts?: boolean
   inputs?: {
-    /**
-     * Where can nexus-prisma find the Prisma Client JS package? By default looks in
-     * `node_modules/@vetching-corporation/prisma-client`. This is needed because nexus-prisma
-     * gets your Prisma schema AST and Prisma Client JS crud info from the generated
-     * Prisma Client JS package.
-     */
-    prismaClient?: string
+    datamodel?: string
   }
   outputs?: {
     /**
@@ -186,14 +180,12 @@ if (process.env.NEXUS_PRISMA_TYPEGEN_PATH) {
   defaultTypegenPath = path.join(__dirname, '../../../@types/typegen-nexus-plugin-prisma/index.d.ts')
 }
 
-let defaultClientPath: string
+let defaultDatamodelPath: string
 
-if (process.env.NEXUS_PRISMA_CLIENT_PATH) {
-  defaultClientPath = process.env.NEXUS_PRISMA_CLIENT_PATH
-} else if (process.env.LINK) {
-  defaultClientPath = eval("path.join(process.cwd(), '/node_modules/@prisma/client')")
+if (process.env.NEXUS_PRISMA_DATAMODEL_PATH) {
+  defaultDatamodelPath = process.env.NEXUS_PRISMA_DATAMODEL_PATH
 } else {
-  defaultClientPath = '@prisma/client'
+  defaultDatamodelPath = path.join(process.cwd(), 'node_modules/.prisma/client/schema.prisma')
 }
 
 // NOTE This will be replaced by Nexus plugins once typegen integration is available.
@@ -210,7 +202,7 @@ const defaultOptions = {
   paginationStrategy: 'relay' as const,
   atomicOperations: true,
   inputs: {
-    prismaClient: defaultClientPath,
+    datamodel: defaultDatamodelPath,
   },
   outputs: {
     typegen: defaultTypegenPath,
@@ -247,7 +239,7 @@ export class SchemaBuilder {
     this.paginationStrategy = paginationStrategies[config.paginationStrategy]
     this.dmmf =
       options.dmmf ||
-      getTransformedDmmf(config.inputs.prismaClient, {
+      getTransformedDmmf(config.inputs.datamodel, {
         globallyComputedInputs: this.globallyComputedInputs,
         paginationStrategy: this.paginationStrategy,
         atomicOperations: config.atomicOperations,
@@ -267,7 +259,7 @@ export class SchemaBuilder {
     }
     if (config.shouldGenerateArtifacts) {
       Typegen.generateSync({
-        prismaClientPath: config.inputs.prismaClient,
+        datamodelPath: config.inputs.datamodel,
         typegenPath: config.outputs.typegen,
         paginationStrategy: this.paginationStrategy,
         nexusPrismaImportId: options.nexusPrismaImportId,

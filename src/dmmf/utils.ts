@@ -2,20 +2,20 @@ import path from 'path'
 import { spawnSync } from 'node:child_process'
 import type { DMMF } from '@prisma/generator-helper'
 
-export const getPrismaClientDmmf = (packagePath: string): DMMF.Document => {
+export const getPrismaClientDmmf = (datamodelPath: string): DMMF.Document => {
   let dmmf: DMMF.Document | undefined = undefined
 
   try {
-    const relativePath = !packagePath
+    const relativePath = !datamodelPath
       ? /* Default Path */
         '/node_modules/.prisma/client/schema.prisma'
       : /* Custom Path */
-        `${packagePath}/schema.prisma`
+        datamodelPath
     const datamodel = path.isAbsolute(relativePath) ? relativePath : path.join(process.cwd(), relativePath)
 
     const generator = spawnSync(process.execPath, [path.join(__dirname, 'generate.js'), datamodel], {
       encoding: 'utf-8',
-      maxBuffer: 1024 * 1024 * 20,
+      maxBuffer: 1024 * 1024 * 100, // 100MB
     })
 
     dmmf = JSON.parse(generator.stdout)
@@ -23,11 +23,11 @@ export const getPrismaClientDmmf = (packagePath: string): DMMF.Document => {
 
   if (!dmmf) {
     try {
-      const prismaClient = require(packagePath)
+      const prismaClient = require('@prisma/client')
       dmmf = prismaClient.dmmf || prismaClient.Prisma.dmmf
     } catch (error) {
       throw new Error(
-        `Failed to import prisma client package at ${packagePath}. The following error occured while trying:`
+        `Failed to import prisma client package at @prisma/client. The following error occured while trying:`
       )
     }
   }

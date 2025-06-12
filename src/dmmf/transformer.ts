@@ -13,10 +13,8 @@ export type TransformOptions = {
   paginationStrategy?: PaginationStrategy
 }
 
-export const getTransformedDmmf = (
-  prismaClientPackagePath: string,
-  options?: TransformOptions
-): DmmfDocument => new DmmfDocument(transform(getPrismaClientDmmf(prismaClientPackagePath), options))
+export const getTransformedDmmf = (datamodelPath: string, options?: TransformOptions): DmmfDocument =>
+  new DmmfDocument(transform(getPrismaClientDmmf(datamodelPath), options))
 
 const addDefaultOptions = (givenOptions?: TransformOptions): Required<TransformOptions> => ({
   globallyComputedInputs: {},
