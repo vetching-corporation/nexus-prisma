@@ -1,9 +1,9 @@
 import path from 'path'
-import type { DMMF } from '@prisma/generator-helper'
-import { getDMMFSync } from '@vetching-corporation/prisma-internals'
+import { spawnSync } from 'node:child_process'
+// import type { DMMF } from '@prisma/generator-helper'
 
 export const getPrismaClientDmmf = (packagePath: string) => {
-  let dmmf: DMMF.Document | undefined = undefined
+  let dmmf: any | undefined = undefined
 
   try {
     const relativePath = !packagePath
@@ -11,11 +11,14 @@ export const getPrismaClientDmmf = (packagePath: string) => {
         '/node_modules/.prisma/client/schema.prisma'
       : /* Custom Path */
         `${packagePath}/schema.prisma`
-    const datamodelPath = path.isAbsolute(relativePath)
-      ? relativePath
-      : path.join(process.cwd(), relativePath)
+    const datamodel = path.isAbsolute(relativePath) ? relativePath : path.join(process.cwd(), relativePath)
 
-    dmmf = getDMMFSync({ datamodelPath })
+    const generator = spawnSync('node', ['generate.js', datamodel], {
+      encoding: 'utf-8',
+      maxBuffer: 1024 * 1024 * 20,
+    })
+
+    dmmf = JSON.parse(generator.stdout)
   } catch {}
 
   if (!dmmf) {

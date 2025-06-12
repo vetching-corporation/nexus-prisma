@@ -158,7 +158,7 @@ input NestedIntFilter {
   not: NestedIntFilter
 }",
   "typegen": "import * as Typegen from '@mercurialweb/nexus-plugin-prisma/typegen'
-import * as Prisma from '@vetching-corporation/prisma-client';
+import * as Prisma from '@prisma/client';
 
 // Pagination type
 type Pagination = {
@@ -354,7 +354,7 @@ input NestedIntFilter {
   not: NestedIntFilter
 }",
   "typegen": "import * as Typegen from '@mercurialweb/nexus-plugin-prisma/typegen'
-import * as Prisma from '@vetching-corporation/prisma-client';
+import * as Prisma from '@prisma/client';
 
 // Pagination type
 type Pagination = {

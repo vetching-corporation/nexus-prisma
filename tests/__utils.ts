@@ -1,5 +1,5 @@
-const PrismaClientGenerator = require('@vetching-corporation/prisma-client/generator-build')
-import * as SDK from '@vetching-corporation/prisma-internals'
+const PrismaClientGenerator = require('@prisma/client/generator-build')
+import * as SDK from '@prisma/internals'
 import * as GQL from 'graphql'
 import * as Nexus from 'nexus'
 import stripAnsi from 'strip-ansi'
@@ -66,7 +66,7 @@ export async function generateSchemaAndTypes(
     schema,
     typegen: renderTypegen({
       dmmf,
-      prismaClientImportId: '@vetching-corporation/prisma-client',
+      prismaClientImportId: '@prisma/client',
       paginationStrategy: options?.paginationStrategy ?? paginationStrategies.relay,
     }),
   }
@@ -94,7 +94,7 @@ export async function generateSchemaAndTypesWithoutThrowing(
   })
   const typegen = renderTypegen({
     dmmf,
-    prismaClientImportId: '@vetching-corporation/prisma-client',
+    prismaClientImportId: '@prisma/client',
     paginationStrategy: paginationStrategies.relay,
   })
 

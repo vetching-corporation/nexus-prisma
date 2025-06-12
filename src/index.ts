@@ -68,11 +68,11 @@ function ensurePeerDepRangeSatisfied(depName: string) {
 if (process.env.STAGE_RUNTIME !== 'docker' && process.env.STAGE_RUNTIME !== 'standalone') {
   ensureDepIsInstalled('nexus')
   ensureDepIsInstalled('graphql')
-  ensureDepIsInstalled('@vetching-corporation/prisma-client')
+  ensureDepIsInstalled('@prisma/client')
 
   ensurePeerDepRangeSatisfied('graphql')
   ensurePeerDepRangeSatisfied('nexus')
-  ensurePeerDepRangeSatisfied('@vetching-corporation/prisma-client')
+  ensurePeerDepRangeSatisfied('@prisma/client')
 }
 
 export * from './plugin'

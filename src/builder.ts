@@ -191,9 +191,9 @@ let defaultClientPath: string
 if (process.env.NEXUS_PRISMA_CLIENT_PATH) {
   defaultClientPath = process.env.NEXUS_PRISMA_CLIENT_PATH
 } else if (process.env.LINK) {
-  defaultClientPath = eval("path.join(process.cwd(), '/node_modules/@vetching-corporation/prisma-client')")
+  defaultClientPath = eval("path.join(process.cwd(), '/node_modules/@prisma/client')")
 } else {
-  defaultClientPath = '@vetching-corporation/prisma-client'
+  defaultClientPath = '@prisma/client'
 }
 
 // NOTE This will be replaced by Nexus plugins once typegen integration is available.
