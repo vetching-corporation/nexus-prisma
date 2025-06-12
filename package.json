@@ -21,7 +21,7 @@
     "build:module-facades": "node scripts/build-module-facades",
     "build:ci": "tsc",
     "dev": "pnpm -s build:module-facades && tsc --watch",
-    "prepublish": "pnpm -s build",
+    "prepublish": "pnpm -s build && cp src/dmmf/generate.js dist/dmmf/generate.js",
     "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts' 'examples/**/*.ts'",
     "postinstall": "node ./scripts/postinstall.js",
     "test": "jest --testTimeout=10000 --forceExit",
