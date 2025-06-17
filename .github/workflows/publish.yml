@@ -1,16 +1,23 @@
-name: Publish to GitHub Packages
+name: npm - Release nexus-prisma
 
 on:
-  push:
-    tags:
-      - v*
+  workflow_dispatch:
+    inputs:
+      packageVersion:
+        required: true
+        description: 'Target package version'
+      commitHash:
+        required: false
+        description: 'Target commit hash'
 
 jobs:
   deploy:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+
     permissions:
       contents: read
       packages: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,15 +25,9 @@ jobs:
       - name: Extract version from tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
-      - name: Create .npmrc file
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GIT_PAT }}" >> .npmrc
-          echo "@vetching-corporation:registry=https://npm.pkg.github.com/" >> .npmrc
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
           run_install: false
 
       - name: Setup Node.js
@@ -37,24 +38,60 @@ jobs:
           node-version: 22
           registry-url: 'https://npm.pkg.github.com'
           scope: '@vetching-corporation'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm install
 
       - name: Build dependencies
         run: pnpm build
 
-      - name: Update package name & version
+      - name: Parse Package Version
+        id: package-version
         run: |
-          # 깃 태그에서 추출한 버전 값
-          echo "Target version: $VERSION"
+          BASE_VERSION="${{ github.event.inputs.packageVersion }}"
+          COMMIT_HASH="${{ github.event.inputs.commitHash }}"
 
-          # 버전 업데이트
-          jq --arg version "$VERSION" '.version = $version' package.json > tmp && mv tmp package.json
+          # 커밋 해시가 없으면 기본 버전 사용 (eg. "6.9.0")
+          if [ -z "$COMMIT_HASH" ]; then
+            echo "PACKAGE_VERSION=${BASE_VERSION}" >> $GITHUB_OUTPUT
+
+          # 커밋 해시가 있으면 dev 버전 사용 (eg. "6.9.0-{sequence}.{commit-hash}")
+          else
+            results=$(
+              curl \
+                -sSfL \
+                -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                -H "Accept: application/vnd.github+json" \
+                "https://api.github.com/orgs/vetching-corporation/packages/npm/prisma-client/versions"
+            )
+            SEQUENCE=$(echo "$results" | jq -r --arg base "$BASE_VERSION" '
+              [.[].name                                       # 모든 tag 이름
+              | select(startswith($base + "-"))               # base-prefix 필터
+              | capture("^" + $base + "-(?<seq>[0-9]+)\\.")   # seq 추출
+              | (.seq | tonumber)                             # 숫자로 변환
+              ] | max // 0 | . + 1                            # 최대값(+1), 없으면 1
+            ')
+
+            echo "PACKAGE_VERSION=${BASE_VERSION}-${SEQUENCE}.${COMMIT_HASH}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install jq
+        uses: dcarbone/install-jq-action@v3
+
+      - name: Set package version
+        run: |
+          PACKAGE_VERSION="${{ steps.package-version.outputs.PACKAGE_VERSION }}"
+
+          # Set package version
+          jq --arg version "$PACKAGE_VERSION" '.version = $version' package.json > package-temp.json
+          mv package-temp.json package.json
 
       - name: Publish packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Prisma cli 패키지 배포
+          # Publish package
           pnpm publish --no-git-checks
