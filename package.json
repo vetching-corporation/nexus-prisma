@@ -28,7 +28,7 @@
     "test:dev": "jest src tests/ --watch"
   },
   "peerDependencies": {
-    "@vetching-corporation/prisma-client": "6.9.0-1.0aa2cf1f882878059f81db7472aa9f3f59957371",
+    "@vetching-corporation/prisma-client": "6.9.0",
     "graphql": "16.7.1",
     "nexus": "1.3.0"
   },

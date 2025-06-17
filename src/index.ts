@@ -30,7 +30,7 @@ function ensureDepIsInstalled(depName: string) {
 
 function ensurePeerDepRangeSatisfied(depName: string) {
   try {
-    const installedVersion: string | undefined = require(`${depName}/package.json`).version
+    const installedVersion: string | undefined = require(`${depName}/package.json`).version?.split('-')[0]
 
     // npm enforces that package manifests have a valid "version" field so this case _should_ never happen under normal circumstances.
     if (!installedVersion) {
@@ -42,7 +42,7 @@ function ensurePeerDepRangeSatisfied(depName: string) {
       return
     }
 
-    const supportedRange: string | undefined = pkgJson.peerDependencies[depName]
+    const supportedRange: string | undefined = pkgJson.peerDependencies[depName]?.split('-')[0]
 
     if (!supportedRange) {
       console.warn(
