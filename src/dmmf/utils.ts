@@ -22,17 +22,6 @@ export const getPrismaClientDmmf = (datamodelPath: string): DMMF.Document => {
   } catch {}
 
   if (!dmmf) {
-    try {
-      const prismaClient = require('@prisma/client')
-      dmmf = prismaClient.dmmf || prismaClient.Prisma.dmmf
-    } catch (error) {
-      throw new Error(
-        `Failed to import prisma client package at @prisma/client. The following error occured while trying:`
-      )
-    }
-  }
-
-  if (!dmmf) {
     throw new Error(`\
 You most likely forgot to initialize the Prisma Client. Please run \`prisma generate\` and try to run it again.
 If that does not solve your problem, please open an issue.`)

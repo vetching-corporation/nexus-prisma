@@ -6,7 +6,7 @@ const prismaDeps = [
   ...Object.entries(packageJson.devDependencies),
 ].filter(([depName]) => depName.startsWith('@prisma/'))
 
-const validVersionRange = packageJson.peerDependencies['@prisma/client']
+const validVersionRange = packageJson.peerDependencies['@vetching-corporation/prisma-client'].split('-')[0]
 
 const invalidDeps = prismaDeps.filter(
   ([, prismaDepVersion]) => !semver.satisfies(prismaDepVersion, validVersionRange)

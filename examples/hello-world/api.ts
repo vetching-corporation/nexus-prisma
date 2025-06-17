@@ -1,4 +1,4 @@
-import { nexusPrisma } from '@mercurialweb/nexus-plugin-prisma'
+import { nexusPrisma } from '@vetching-corporation/nexus-prisma'
 import { PrismaClient, User } from '@prisma/client'
 import { ApolloServer, PubSub } from 'apollo-server-express'
 import express from 'express'
