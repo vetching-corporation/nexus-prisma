@@ -13,10 +13,8 @@ export type TransformOptions = {
   paginationStrategy?: PaginationStrategy
 }
 
-export const getTransformedDmmf = (
-  prismaClientPackagePath: string,
-  options?: TransformOptions
-): DmmfDocument => new DmmfDocument(transform(getPrismaClientDmmf(prismaClientPackagePath), options))
+export const getTransformedDmmf = (datamodelPath: string, options?: TransformOptions): DmmfDocument =>
+  new DmmfDocument(transform(getPrismaClientDmmf(datamodelPath), options))
 
 const addDefaultOptions = (givenOptions?: TransformOptions): Required<TransformOptions> => ({
   globallyComputedInputs: {},
@@ -43,7 +41,7 @@ function transformDatamodel(datamodel: DMMF.Datamodel): InternalDMMF.Datamodel {
         ...field,
         kind: field.kind === 'object' ? 'relation' : field.kind,
       })),
-    })) as any, // TODO: Remove this once @prisma/client/runtime:DMMF contains the `uniqueFields` typed
+    })) as any, // TODO: Remove this once @vetching-corporation/prisma-client/runtime:DMMF contains the `uniqueFields` typed
   }
 }
 

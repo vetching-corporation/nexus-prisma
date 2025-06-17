@@ -57,5 +57,5 @@ Note: If a relation doesn't have filtering capabilities in the generated Prisma 
 ```
 npm install @mercurialweb/nexus-plugin-prisma
 # OR
-yarn add @mercurialweb/nexus-plugin-prisma
+pnpm add @mercurialweb/nexus-plugin-prisma
 ```

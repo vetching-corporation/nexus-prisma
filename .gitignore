@@ -4,7 +4,6 @@ example/db
 example/migrations
 example/generated
 .DS_Store
-yarn-error.log
 failed-*.md
 .idea
 .yalc

@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client'
 import { GraphQLResolveInfo } from 'graphql'
 import { core } from 'nexus'
 import { CommonFieldConfig } from 'nexus/dist/core'
@@ -6,18 +5,6 @@ import * as Helpers from './helpers'
 
 // todo remove framework types from here once
 // https://github.com/graphql-nexus/nexus/issues/1069
-
-/**
- * Framework-only
- */
-
-declare global {
-  interface NexusTestContextApp {
-    db: {
-      client: PrismaClient
-    }
-  }
-}
 
 /**
  * Framework & Library
@@ -170,7 +157,7 @@ export type BaseRelationOptions<
   resolve?: CustomFieldResolver<TypeName, Alias extends undefined ? MethodName : Alias>
   computedInputs?: LocalComputedInputs<MethodName>
 } & NexusGenPluginFieldConfig<TypeName, Alias extends undefined ? MethodName : Alias> &
-CommonFieldConfig
+  CommonFieldConfig
 
 // If GetNexusPrismaInput returns never, it means there are no filtering/ordering args for it.
 type NexusPrismaRelationOpts<

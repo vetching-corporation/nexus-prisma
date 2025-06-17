@@ -6,11 +6,11 @@
     "dev": "ts-node-dev --transpile-only api",
     "dev:typecheck": "tsc --watch --noEmit",
     "dev:migrate": "prisma migrate save --experimental -c && prisma migrate up --experimental -c",
-    "build": "yarn nexus:reflect && tsc",
+    "build": "pnpm nexus:reflect && tsc",
     "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only api"
   },
   "dependencies": {
-    "@mercurialweb/nexus-plugin-prisma": "^0.37.0",
+    "@vetching-corporation/nexus-prisma": "^6",
     "@prisma/client": "^2.30.0",
     "apollo-server-express": "^2.19.1",
     "express": "^4.17.1",

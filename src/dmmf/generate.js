@@ -1,6 +1,20 @@
-const SDK = require('@prisma/internals')
-const path = require('path')
+const { getSchemaWithPath, extractPreviewFeatures, getConfig, getDMMF } = require('@prisma/internals')
 
-SDK.getDMMF({
-  datamodelPath: path.join(process.cwd(), '/node_modules/.prisma/client/schema.prisma'),
-}).then((dmmf) => console.log(JSON.stringify(dmmf)))
+const [, , datamodelPath] = process.argv;
+
+(async () => {
+  try {
+    const { schemas } = await getSchemaWithPath(datamodelPath)
+    const config = await getConfig({ datamodel: schemas, ignoreEnvVarErrors: true })
+    const previewFeatures = extractPreviewFeatures(config.generators)
+    const dmmf = await getDMMF({
+      datamodel: schemas,
+      previewFeatures
+    })
+
+    process.stdout.write(JSON.stringify(dmmf))
+  } catch (error) {
+    console.error(error)
+    process.exit(1)
+  }
+})()

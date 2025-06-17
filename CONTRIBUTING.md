@@ -25,7 +25,7 @@ The Nexus Prisma plugin source code is in the `src` directory.
   - Set `NEXUS_PLUGIN_PRISMA_VERSION` as you wish
   - Have docker running on your machine
   - `docker-compose up -d`
-  - `yarn test:fw:e2e:<name>`
+  - `pnpm test:fw:e2e:<name>`
 
 #### Small PRs
 
