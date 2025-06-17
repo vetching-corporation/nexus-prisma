@@ -1,3 +1,4 @@
+import fs from 'fs'
 import path from 'path'
 import type * as DMMF from '@prisma/dmmf'
 import { getDMMFSync } from './getDMMFSync'
@@ -11,9 +12,9 @@ export const getPrismaClientDmmf = (datamodelPath: string): DMMF.Document => {
         '/node_modules/.prisma/client/schema.prisma'
       : /* Custom Path */
         datamodelPath
-    const datamodel = path.isAbsolute(relativePath) ? relativePath : path.join(process.cwd(), relativePath)
+    const absolutePath = path.isAbsolute(relativePath) ? relativePath : path.join(process.cwd(), relativePath)
 
-    dmmf = getDMMFSync({ datamodel })
+    dmmf = getDMMFSync({ datamodel: fs.readFileSync(absolutePath, 'utf-8') })
   } catch {}
 
   if (!dmmf) {
