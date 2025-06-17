@@ -9,7 +9,10 @@ const prismaDeps = [
 const validVersionRange = packageJson.peerDependencies['@vetching-corporation/prisma-client'].split('-')[0]
 
 const invalidDeps = prismaDeps.filter(
-  ([, prismaDepVersion]) => !semver.satisfies(prismaDepVersion, validVersionRange)
+  ([, prismaDepVersion]) => {
+    const targetVersion = prismaDepVersion.split('-')[0]
+    return !semver.satisfies(targetVersion, validVersionRange)
+  }
 )
 
 if (invalidDeps.length > 0) {
