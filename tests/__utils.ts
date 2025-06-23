@@ -1,4 +1,5 @@
 const PrismaClientGenerator = require('@prisma/client/generator-build')
+import fs from 'fs'
 import * as SDK from '@prisma/internals'
 import * as GQL from 'graphql'
 import * as Nexus from 'nexus'
@@ -28,7 +29,7 @@ export async function getDmmf(datamodel: string, options?: TransformOptions) {
 
 export async function getPinnedDmmfFromSchemaPath(datamodelPath: string) {
   return SDK.getDMMF({
-    datamodelPath,
+    datamodel: fs.readFileSync(datamodelPath, 'utf-8'),
   })
 }
 

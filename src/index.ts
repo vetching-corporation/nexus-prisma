@@ -71,7 +71,7 @@ if (process.env.STAGE_RUNTIME !== 'docker' && process.env.STAGE_RUNTIME !== 'sta
 
   ensurePeerDepRangeSatisfied('graphql')
   ensurePeerDepRangeSatisfied('nexus')
-  ensurePeerDepRangeSatisfied('@vetching-corporation/prisma-client')
+  ensurePeerDepRangeSatisfied('@prisma/client')
 }
 
 export * from './plugin'
