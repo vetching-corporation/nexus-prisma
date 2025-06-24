@@ -15,8 +15,8 @@ importers:
         specifier: 6.9.0
         version: 6.9.0(typescript@5.1.3)
       '@prisma/prisma-schema-wasm':
-        specifier: 6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e
-        version: 6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e
+        specifier: 6.10.1-1.9b628578b3b7cae625e8c927178f15a170e74a9c
+        version: 6.10.1-1.9b628578b3b7cae625e8c927178f15a170e74a9c
       camelcase:
         specifier: ^6.3.0
         version: 6.3.0
@@ -76,8 +76,8 @@ importers:
         specifier: 7.5.0
         version: 7.5.0
       '@vetching-corporation/prisma-client':
-        specifier: 6.9.0-1.0aa2cf1f882878059f81db7472aa9f3f59957371
-        version: 6.9.0-1.0aa2cf1f882878059f81db7472aa9f3f59957371(typescript@5.1.3)
+        specifier: 6.10.1-1.353b7866a8dfb841a9cde236eb7ca4d85ac7798d
+        version: 6.10.1-1.353b7866a8dfb841a9cde236eb7ca4d85ac7798d(typescript@5.1.3)
       cash-rm:
         specifier: 0.2.0
         version: 0.2.0
@@ -531,6 +531,9 @@ packages:
     peerDependencies:
       '@prisma/internals': '*'
 
+  '@prisma/prisma-schema-wasm@6.10.1-1.9b628578b3b7cae625e8c927178f15a170e74a9c':
+    resolution: {integrity: sha512-y0LCcpB9jxKxy6T9IADInvYDmOxKghIhh31a0C767YQ5cPpUxi30ATK7xE994bdRBsF00oSxfrgk6wmKuzhWuA==}
+
   '@prisma/prisma-schema-wasm@6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e':
     resolution: {integrity: sha512-ObgoBaIXT6UCgWDRSLsc+7gbMXmhrx6YKnPds6VCUNLxik81S+qKCNBm9YDm/RzSe/5W0WLk0zm/RjKL8aMu+g==}
 
@@ -650,8 +653,8 @@ packages:
   '@types/yargs@17.0.33':
     resolution: {integrity: sha512-WpxBCKWPLr4xSsHgz511rFJAM+wS28w2zEO1QDNY5zM/S8ok70NNfztH0xwhqKyaK0OHCbN98LDAZuy1ctxDkA==}
 
-  '@vetching-corporation/prisma-client@6.9.0-1.0aa2cf1f882878059f81db7472aa9f3f59957371':
-    resolution: {integrity: sha512-eNoV+Nizlk+2MXHwHn7fCt0K7YIjA2lrBg+HPo1aZKh3pYim56EnNdhaVMq61Ddg3dPAFNja50SA+9qCusfVjw==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-client/6.9.0-1.0aa2cf1f882878059f81db7472aa9f3f59957371/ece46bb062fc2e95c38a850e6999a144b7c4dc66}
+  '@vetching-corporation/prisma-client@6.10.1-1.353b7866a8dfb841a9cde236eb7ca4d85ac7798d':
+    resolution: {integrity: sha512-/4VwNKGr05eVJP1n7UTejQjy7ZOa1CXtrIEoOyKCu8gt6xi4v/kilMCBXuy8FhEhOU+AX8tKJ39m3aGUm1nwjw==, tarball: https://npm.pkg.github.com/download/@vetching-corporation/prisma-client/6.10.1-1.353b7866a8dfb841a9cde236eb7ca4d85ac7798d/c7f25512e16059090ae0826bedeb9ff42270bb62}
     engines: {node: '>=18.18'}
     peerDependencies:
       '@vetching-corporation/prisma-cli': '*'
@@ -3434,6 +3437,8 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
+  '@prisma/prisma-schema-wasm@6.10.1-1.9b628578b3b7cae625e8c927178f15a170e74a9c': {}
+
   '@prisma/prisma-schema-wasm@6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e': {}
 
   '@prisma/schema-engine-wasm@6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e': {}
@@ -3563,7 +3568,7 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@vetching-corporation/prisma-client@6.9.0-1.0aa2cf1f882878059f81db7472aa9f3f59957371(typescript@5.1.3)':
+  '@vetching-corporation/prisma-client@6.10.1-1.353b7866a8dfb841a9cde236eb7ca4d85ac7798d(typescript@5.1.3)':
     optionalDependencies:
       typescript: 5.1.3
 
