@@ -10,6 +10,9 @@ on:
         required: false
         description: 'Target commit hash'
 
+env:
+  npm-tag: ${{ inputs.commitHash && 'dev' || 'latest' }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -95,4 +98,4 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Publish package
-          pnpm publish --no-git-checks
+          pnpm publish --no-git-checks -t ${{ env.npm-tag }}
