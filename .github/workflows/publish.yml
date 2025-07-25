@@ -98,4 +98,4 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Publish package
-          pnpm publish --no-git-checks -t ${{ env.npm-tag }}
+          pnpm publish --no-git-checks --tag ${{ env.npm-tag }}
